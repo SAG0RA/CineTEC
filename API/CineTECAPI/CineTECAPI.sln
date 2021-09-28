@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31613.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CineTECAPI", "TestAPI\CineTECAPI.csproj", "{07081BE1-BA9C-4784-B4DA-C1FAD9C1E98C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CineTECAPI", "CineTECAPI.csproj", "{ACC12EF6-11BE-4A4D-A18A-173EE6FD66B8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{07081BE1-BA9C-4784-B4DA-C1FAD9C1E98C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{07081BE1-BA9C-4784-B4DA-C1FAD9C1E98C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{07081BE1-BA9C-4784-B4DA-C1FAD9C1E98C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{07081BE1-BA9C-4784-B4DA-C1FAD9C1E98C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACC12EF6-11BE-4A4D-A18A-173EE6FD66B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACC12EF6-11BE-4A4D-A18A-173EE6FD66B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACC12EF6-11BE-4A4D-A18A-173EE6FD66B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACC12EF6-11BE-4A4D-A18A-173EE6FD66B8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {944BC214-BDF2-4E3B-9C81-5D6A649EDE23}
+		SolutionGuid = {43CD8ED4-392E-454A-81E4-CD2CA9776005}
 	EndGlobalSection
 EndGlobal
