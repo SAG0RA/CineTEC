@@ -15,5 +15,8 @@ namespace CineTECAPI.Models
         public DateTime fechanac { get; set; }
         public int edad { get; set; }
 
+        public string usuario { get; set; }
+        public string contraseña { get; set; }
+
     }
 }

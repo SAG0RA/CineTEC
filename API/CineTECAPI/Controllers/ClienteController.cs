@@ -33,7 +33,9 @@ namespace CineTECAPI.Controllers
                    apellido as ""apellido"",
                    telefono as ""telefono"",
                    to_char(fechanac, 'YYYY-MM-DD') as ""fechanac"",
-                   edad as ""edad""
+                   edad as ""edad"",
+                   usuario as ""usuario"",
+                   contraseña as ""contraseña""
                 from Cliente
             ";
 
@@ -60,8 +62,8 @@ namespace CineTECAPI.Controllers
         public JsonResult Post(Cliente cl)
         {
             string query = @"
-                insert into Cliente(cedula, pnombre, snombre, apellido, telefono, fechanac, edad) 
-                values             (@cedula, @pnombre, @snombre, @apellido, @telefono, @fechanac, @edad)              
+                insert into Cliente(cedula, pnombre, snombre, apellido, telefono, fechanac, edad, usuario, contraseña) 
+                values             (@cedula, @pnombre, @snombre, @apellido, @telefono, @fechanac, @edad, @usuario, @contraseña)              
             ";
 
             DataTable table = new DataTable();
@@ -79,6 +81,8 @@ namespace CineTECAPI.Controllers
                     myCommand.Parameters.AddWithValue("@telefono", cl.telefono);
                     myCommand.Parameters.AddWithValue("@fechanac", Convert.ToDateTime(cl.fechanac));
                     myCommand.Parameters.AddWithValue("@edad", cl.edad);
+                    myCommand.Parameters.AddWithValue("@usuario", cl.usuario);
+                    myCommand.Parameters.AddWithValue("@contraseña", cl.contraseña);
 
                     myReader = myCommand.ExecuteReader();
                     table.Load(myReader);
@@ -87,7 +91,7 @@ namespace CineTECAPI.Controllers
                     myCon.Close();
                 }
             }
-            return new JsonResult("Añadido exitosamente");
+            return new JsonResult("Cliente añadido exitosamente");
         }
 
 
@@ -102,7 +106,9 @@ namespace CineTECAPI.Controllers
                     apellido = @apellido,
                     telefono = @telefono,
                     fechanac = @fechanac,
-                    edad = @edad
+                    edad = @edad,
+                    usuario = @usuario,
+                    contraseña = @contraseña
                 where cedula=@cedula
             ";
 
@@ -121,6 +127,9 @@ namespace CineTECAPI.Controllers
                     myCommand.Parameters.AddWithValue("@telefono", cl.telefono);
                     myCommand.Parameters.AddWithValue("@fechanac", Convert.ToDateTime(cl.fechanac));
                     myCommand.Parameters.AddWithValue("@edad", cl.edad);
+                    myCommand.Parameters.AddWithValue("@usuario", cl.usuario);
+                    myCommand.Parameters.AddWithValue("@contraseña", cl.contraseña);
+
                     myReader = myCommand.ExecuteReader();
                     table.Load(myReader);
 
@@ -128,7 +137,7 @@ namespace CineTECAPI.Controllers
                     myCon.Close();
                 }
             }
-            return new JsonResult("Actualizado exitosamente");
+            return new JsonResult("Cliente actualizado exitosamente");
         }
 
         [HttpDelete("{id}")]
