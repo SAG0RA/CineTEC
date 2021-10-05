@@ -1,8 +1,6 @@
 import android.util.Log
-import android.widget.TextView
-import com.example.app.API.Cuenta
+import com.example.app.API.Cliente
 import com.example.app.API.Usuarios
-import com.example.app.Funciones.Seleccion
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -29,29 +27,34 @@ class RestAPIService {
     /**Funcion encargada de enviar la solicitud GET al REST API en /cuentas
      * @param detalles: la pantalla donde se mostraran los datos de la cuenta
      */
-    fun getAccount(detalles: TextView) {
+    fun getClient() {
         val retrofit = ServiceBuilder.buildService(RestAPI::class.java)
-        retrofit.getAccount().enqueue(object : Callback<List<Cuenta>> {
-            override fun onResponse(call: Call<List<Cuenta>>, response: Response<List<Cuenta>>) {
+        retrofit.getAccount().enqueue(object : Callback<List<Cliente>> {
+            override fun onResponse(call: Call<List<Cliente>>, response: Response<List<Cliente>>) {
                 val datos = response.body()
+
 // Aqui se envian los datos correspondientes
-                if (datos != null) {
-                    Seleccion().verCuenta(datos,detalles)
-                }
+//                if (datos != null) {
+//                    Seleccion().verCuenta(datos,detalles)
+//                }
+
 // Print para verificar que se haya hecho bien la solicitud
                 for (c in datos!!)
                     Log.d(
-                        "CUENTA: ",
-                        "Numero de cuenta: ${c.numero_cuenta} " +
-                                "\n Descripcion: ${c.descripcion} " +
-                                "\n Moneda: ${c.moneda} " +
-                                "\n Tipo de cuenta: ${c.tipo_cuenta} " +
-                                "\n Cliente: ${c.acliente}"
+                        "CLIENTE: ",
+                        "Cedula: ${c.cedula} " +
+                                "\n Nombre: ${c.pnombre} " +
+                                "\n Apellido: ${c.apellido} " +
+                                "\n Telefono: ${c.telefono} " +
+                                "\n Fecha de nacimiento: ${c.fechanac}" +
+                                "\n Edad: ${c.edad}" +
+                                "\n Usuario: ${c.usuario}" +
+                                "\n Contrasena: ${c.contraseña}"
                     )
 
             }
 
-            override fun onFailure(call: Call<List<Cuenta>>, t: Throwable) {
+            override fun onFailure(call: Call<List<Cliente>>, t: Throwable) {
                 Log.d("Error", t.message)
             }
         })

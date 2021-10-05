@@ -1,5 +1,6 @@
 package com.example.app.Funciones
 
+import RestAPIService
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -13,6 +14,9 @@ class Inicio: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.inicio)
+        val API = RestAPIService()
+        API.getClient()
+
 
         handler = Handler()
         handler.postDelayed({
