@@ -1,5 +1,5 @@
 import com.example.app.API.Usuarios
-import com.example.app.API.Cliente
+import com.example.app.API.Clientes
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -13,5 +13,5 @@ interface RestAPI {
         fun addUser(@Body userData: Usuarios): Call<Usuarios>
 
         @GET("/api/cliente")
-        fun getAccount(): Call<List<Cliente>>
+        fun getAccount(): Call<List<Clientes>>
 }

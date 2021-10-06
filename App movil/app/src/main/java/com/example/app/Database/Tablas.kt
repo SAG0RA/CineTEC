@@ -8,6 +8,8 @@ class Tablas {
             val CEDULA = "Cedula"
             val EDAD = "Edad"
             val FECHA_NAC = "Fecha de nacimiento"
+            val USUARIO = "Usuario"
+            val CONTRASENA = "Contrasena"
         }
     }
 }

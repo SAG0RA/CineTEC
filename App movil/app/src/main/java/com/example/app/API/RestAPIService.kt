@@ -1,11 +1,13 @@
 import android.util.Log
-import com.example.app.API.Cliente
+import com.example.app.API.Clientes
 import com.example.app.API.Usuarios
+import com.example.app.Database.Cliente.ClienteMod
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class RestAPIService {
+    var list:MutableList<ClienteMod> = ArrayList()
     /**Funcion encargada de enviar la solicitud POST al REST API a /clientes
      * @param userData: Datos que se van a enviar
      */
@@ -29,17 +31,14 @@ class RestAPIService {
      */
     fun getClient() {
         val retrofit = ServiceBuilder.buildService(RestAPI::class.java)
-        retrofit.getAccount().enqueue(object : Callback<List<Cliente>> {
-            override fun onResponse(call: Call<List<Cliente>>, response: Response<List<Cliente>>) {
+        retrofit.getAccount().enqueue(object : Callback<List<Clientes>> {
+            override fun onResponse(call: Call<List<Clientes>>, response: Response<List<Clientes>>) {
                 val datos = response.body()
 
-// Aqui se envian los datos correspondientes
-//                if (datos != null) {
-//                    Seleccion().verCuenta(datos,detalles)
-//                }
 
 // Print para verificar que se haya hecho bien la solicitud
                 for (c in datos!!)
+//                    list.add(ClienteMod())
                     Log.d(
                         "CLIENTE: ",
                         "Cedula: ${c.cedula} " +
@@ -54,7 +53,7 @@ class RestAPIService {
 
             }
 
-            override fun onFailure(call: Call<List<Cliente>>, t: Throwable) {
+            override fun onFailure(call: Call<List<Clientes>>, t: Throwable) {
                 Log.d("Error", t.message)
             }
         })
