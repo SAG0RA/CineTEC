@@ -2,12 +2,15 @@ import android.util.Log
 import com.example.app.API.Clientes
 import com.example.app.API.Usuarios
 import com.example.app.Database.Cliente.ClienteMod
+import com.example.app.Database.Cliente.ClientesDB
+import com.example.app.Funciones.Inicio
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class RestAPIService {
-    var list:MutableList<ClienteMod> = ArrayList()
+
+
     /**Funcion encargada de enviar la solicitud POST al REST API a /clientes
      * @param userData: Datos que se van a enviar
      */
@@ -26,22 +29,27 @@ class RestAPIService {
         )
     }
 
-    /**Funcion encargada de enviar la solicitud GET al REST API en /cuentas
+    /**Funcion encargada de enviar la solicitud GET al REST API en /api/cliente
      * @param detalles: la pantalla donde se mostraran los datos de la cuenta
      */
-    fun getClient() {
+    fun getClient(db: ClientesDB) {
         val retrofit = ServiceBuilder.buildService(RestAPI::class.java)
         retrofit.getAccount().enqueue(object : Callback<List<Clientes>> {
-            override fun onResponse(call: Call<List<Clientes>>, response: Response<List<Clientes>>) {
+            override fun onResponse(
+                call: Call<List<Clientes>>,
+                response: Response<List<Clientes>>
+            ) {
                 val datos = response.body()
 
+                if (datos != null) {
+                    Inicio().cargarDatos(datos,db)
+                }
 
-// Print para verificar que se haya hecho bien la solicitud
                 for (c in datos!!)
-//                    list.add(ClienteMod())
+// Print para verificar que se haya hecho bien la solicitud
                     Log.d(
                         "CLIENTE: ",
-                        "Cedula: ${c.cedula} " +
+                             "Cedula: ${c.cedula} " +
                                 "\n Nombre: ${c.pnombre} " +
                                 "\n Apellido: ${c.apellido} " +
                                 "\n Telefono: ${c.telefono} " +

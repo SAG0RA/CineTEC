@@ -4,28 +4,30 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.util.Log
 import com.example.app.Database.Tablas
 
 class ClientesDB (context: Context): SQLiteOpenHelper(context, DATABASE_NAME,null, DATABASE_VERSION){
-    private val DB: SQLiteDatabase
+    private val db: SQLiteDatabase
     private val values: ContentValues
 
     companion object{
-        private val DATABASE_VERSION = 1
-        private val DATABASE_NAME = "Clientes"
+        val DATABASE_VERSION = 1
+        val DATABASE_NAME = "Clientes"
     }
 
     init{
-        DB = this.writableDatabase
+        db = this.writableDatabase
         values = ContentValues()
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
         db!!.execSQL("CREATE TABLE "+ Tablas.Cliente.TABLE_NAME +" (" +
                 Tablas.Cliente.NOMBRE + " TEXT NOT NULL," +
+                Tablas.Cliente.APELLIDO + " TEXT NOT NULL," +
                 Tablas.Cliente.CEDULA + " INTEGER PRIMARY KEY," +
                 Tablas.Cliente.EDAD + " TEXT NOT NULL," +
-                Tablas.Cliente.FECHA_NAC + " DATE," +
+                Tablas.Cliente.FECHA_NAC + " TEXT NOT NULL," +
                 Tablas.Cliente.USUARIO + " TEXT NOT NULL," +
                 Tablas.Cliente.CONTRASENA + " TEXT NOT NULL)")
     }
@@ -34,12 +36,20 @@ class ClientesDB (context: Context): SQLiteOpenHelper(context, DATABASE_NAME,nul
 
     }
 
-    fun insert(cliente: List<ClienteMod>){
-        values.put(Tablas.Cliente.NOMBRE, cliente[0].getNombre())
-        values.put(Tablas.Cliente.CEDULA, cliente[0].getCedula())
-        values.put(Tablas.Cliente.EDAD, cliente[0].getEdad())
-        values.put(Tablas.Cliente.FECHA_NAC, cliente[0].getFecha_nac())
-        values.put(Tablas.Cliente.USUARIO, cliente[0].getUsuario())
-        values.put(Tablas.Cliente.CONTRASENA, cliente[0].getContrasena())
+    fun insert(cliente: ClienteMod){
+        values.put(Tablas.Cliente.NOMBRE, cliente.nombre)
+        values.put(Tablas.Cliente.APELLIDO, cliente.apellido)
+        values.put(Tablas.Cliente.CEDULA, cliente.cedula)
+        values.put(Tablas.Cliente.EDAD, cliente.edad)
+        values.put(Tablas.Cliente.FECHA_NAC, cliente.fecha_nac)
+        values.put(Tablas.Cliente.USUARIO, cliente.usuario)
+        values.put(Tablas.Cliente.CONTRASENA, cliente.contrasena)
+        db.insert(Tablas.Cliente.TABLE_NAME,null,values)
+        Log.d("Usuario:","Registro exitoso")
     }
+//
+//    fun getData(): MutableList<ClienteMod>{
+//        Tablas.Cliente.Clientela.clear()
+//
+//    }
 }
