@@ -1,7 +1,5 @@
 package com.example.app.Database
 
-import com.example.app.Database.Cliente.ClienteMod
-
 class Tablas {
     abstract class Cliente{
         companion object{

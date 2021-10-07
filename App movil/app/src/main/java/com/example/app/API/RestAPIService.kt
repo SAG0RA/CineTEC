@@ -1,7 +1,6 @@
 import android.util.Log
 import com.example.app.API.Clientes
 import com.example.app.API.Usuarios
-import com.example.app.Database.Cliente.ClienteMod
 import com.example.app.Database.Cliente.ClientesDB
 import com.example.app.Funciones.Inicio
 import retrofit2.Call
@@ -42,7 +41,7 @@ class RestAPIService {
                 val datos = response.body()
 
                 if (datos != null) {
-                    Inicio().cargarDatos(datos,db)
+                    Inicio().sync_Cliente(datos,db)
                 }
 
                 for (c in datos!!)

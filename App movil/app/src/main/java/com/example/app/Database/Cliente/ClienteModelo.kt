@@ -1,6 +1,6 @@
 package com.example.app.Database.Cliente
 
-class ClienteMod {
+class ClienteModelo {
 
      var cedula: Int = 0
      var nombre: String = ""
@@ -18,5 +18,12 @@ class ClienteMod {
         this.fecha_nac = fecha_nac
         this.usuario = usuario
         this.contrasena = contrasena
+    }
+
+    constructor() {
+    }
+
+    override fun toString(): String {
+        return usuario
     }
 }

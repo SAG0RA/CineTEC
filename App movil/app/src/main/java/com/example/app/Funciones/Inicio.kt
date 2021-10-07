@@ -4,12 +4,10 @@ import RestAPIService
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.app.API.Clientes
-import com.example.app.Database.Cliente.ClienteMod
+import com.example.app.Database.Cliente.ClienteModelo
 import com.example.app.Database.Cliente.ClientesDB
-import com.example.app.Database.Tablas
 import com.example.app.R
 
 class Inicio : AppCompatActivity() {
@@ -20,11 +18,13 @@ class Inicio : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.inicio)
+
         ///////////////////
         db = ClientesDB(this)
         val API = RestAPIService()
         API.getClient(db!!)
         ///////////////////
+
         handler = Handler()
         handler.postDelayed({
 
@@ -34,9 +34,9 @@ class Inicio : AppCompatActivity() {
         }, 3000)
     }
 
-    fun cargarDatos(datos: List<Clientes>, db: ClientesDB) {
+    fun sync_Cliente(datos: List<Clientes>, db: ClientesDB) {
         for (c in datos) {
-            val carga_cliente = ClienteMod(
+            val carga_cliente = ClienteModelo(
                 c.cedula,
                 c.pnombre,
                 c.apellido,

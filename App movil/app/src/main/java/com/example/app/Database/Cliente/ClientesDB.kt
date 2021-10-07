@@ -36,7 +36,7 @@ class ClientesDB (context: Context): SQLiteOpenHelper(context, DATABASE_NAME,nul
 
     }
 
-    fun insert(cliente: ClienteMod){
+    fun insert(cliente: ClienteModelo){
         values.put(Tablas.Cliente.NOMBRE, cliente.nombre)
         values.put(Tablas.Cliente.APELLIDO, cliente.apellido)
         values.put(Tablas.Cliente.CEDULA, cliente.cedula)
@@ -47,9 +47,23 @@ class ClientesDB (context: Context): SQLiteOpenHelper(context, DATABASE_NAME,nul
         db.insert(Tablas.Cliente.TABLE_NAME,null,values)
         Log.d("Usuario:","Registro exitoso")
     }
-//
-//    fun getData(): MutableList<ClienteMod>{
-//        Tablas.Cliente.Clientela.clear()
-//
-//    }
+
+    fun getData(): MutableList<ClienteModelo>{
+        val list: MutableList<ClienteModelo> = ArrayList()
+        val query = "Select * from " + Tablas.Cliente.TABLE_NAME
+        val result = db.rawQuery(query,null)
+        if(result.moveToFirst()){
+            do{
+                val cliente = ClienteModelo()
+                cliente.usuario = result.getString(result.getColumnIndex(Tablas.Cliente.USUARIO))
+                cliente.contrasena = result.getString(result.getColumnIndex(Tablas.Cliente.CONTRASENA))
+                list.add(cliente)
+            }while(result.moveToNext())
+        }
+
+        result.close()
+        db.close()
+
+        return list
+    }
 }
