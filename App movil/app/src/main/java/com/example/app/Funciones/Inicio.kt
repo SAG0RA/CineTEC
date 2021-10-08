@@ -5,7 +5,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
-import com.example.app.API.Clientes
+import com.example.app.API.Data.Cines
+import com.example.app.API.Data.Clientes
+import com.example.app.Database.Cine.CineModelo
+import com.example.app.Database.Cine.CinesDB
 import com.example.app.Database.Cliente.ClienteModelo
 import com.example.app.Database.Cliente.ClientesDB
 import com.example.app.R
@@ -13,17 +16,22 @@ import com.example.app.R
 class Inicio : AppCompatActivity() {
 
     lateinit var handler: Handler
-    private var db: ClientesDB? = null
+    private var clientedb: ClientesDB? = null
+    private var cinedb: CinesDB? = null
+    
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.inicio)
 
-        ///////////////////
-        db = ClientesDB(this)
+        //////////// SINCRONIZACION CON BASE DE DATOS ///////////
+        clientedb = ClientesDB(this)
+        cinedb = CinesDB(this)
+
         val API = RestAPIService()
-        API.getClient(db!!)
-        ///////////////////
+        API.getClient(clientedb!!)
+        API.getCine(cinedb!!)
+        /////////////////////////////////////////////////////////
 
         handler = Handler()
         handler.postDelayed({
@@ -46,6 +54,17 @@ class Inicio : AppCompatActivity() {
                 c.contraseña
             )
             db.insert(carga_cliente)
+        }
+    }
+
+    fun sync_Cines(datos: List<Cines>, db: CinesDB) {
+        for (c in datos) {
+            val carga_cine = CineModelo(
+                c.cantidadsalas,
+                c.nombrecine,
+                c.ubicacion
+            )
+            db.insert(carga_cine)
         }
     }
 

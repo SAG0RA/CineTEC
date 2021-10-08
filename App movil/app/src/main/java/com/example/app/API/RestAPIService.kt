@@ -1,6 +1,9 @@
 import android.util.Log
-import com.example.app.API.Clientes
-import com.example.app.API.Usuarios
+import com.example.app.API.Data.Cines
+import com.example.app.API.Data.Clientes
+import com.example.app.API.Data.Usuarios
+import com.example.app.Database.Cine.CineModelo
+import com.example.app.Database.Cine.CinesDB
 import com.example.app.Database.Cliente.ClientesDB
 import com.example.app.Funciones.Inicio
 import retrofit2.Call
@@ -8,8 +11,6 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class RestAPIService {
-
-
     /**Funcion encargada de enviar la solicitud POST al REST API a /clientes
      * @param userData: Datos que se van a enviar
      */
@@ -29,15 +30,12 @@ class RestAPIService {
     }
 
     /**Funcion encargada de enviar la solicitud GET al REST API en /api/cliente
-     * @param detalles: la pantalla donde se mostraran los datos de la cuenta
+     * @param db: Base de datos donde se guardara la correspondiente info
      */
     fun getClient(db: ClientesDB) {
         val retrofit = ServiceBuilder.buildService(RestAPI::class.java)
-        retrofit.getAccount().enqueue(object : Callback<List<Clientes>> {
-            override fun onResponse(
-                call: Call<List<Clientes>>,
-                response: Response<List<Clientes>>
-            ) {
+        retrofit.getClient().enqueue(object : Callback<List<Clientes>> {
+            override fun onResponse(call: Call<List<Clientes>>, response: Response<List<Clientes>>) {
                 val datos = response.body()
 
                 if (datos != null) {
@@ -65,6 +63,34 @@ class RestAPIService {
             }
         })
 
+    }
+
+    /**Funcion encargada de enviar la solicitud GET al REST API en /api/sucursal
+     * @param db: Base de datos donde se guardara la correspondiente info
+     */
+    fun getCine(db: CinesDB){
+        val retrofit = ServiceBuilder.buildService(RestAPI::class.java)
+        retrofit.getCine().enqueue(object : Callback<List<Cines>> {
+            override fun onResponse(call: Call<List<Cines>>, response: Response<List<Cines>>) {
+                val datos = response.body()
+
+                if (datos != null) {
+                    Inicio().sync_Cines(datos,db)
+                }
+
+                for (c in datos!!)
+// Print para verificar que se haya hecho bien la solicitud
+                    Log.d(
+                        "CINE: ",
+                             "Cine: ${c.nombrecine} " +
+                                "\n Ubicacion: ${c.ubicacion} " +
+                                "\n Cantidad de salas: ${c.cantidadsalas}"
+                    )
+            }
+            override fun onFailure(call: Call<List<Cines>>, t: Throwable) {
+                Log.d("Error", t.message)
+            }
+        })
     }
 
 }

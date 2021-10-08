@@ -33,13 +33,11 @@ class Login : AppCompatActivity() {
         //Botón de acceso a la ventana de Seleccionar
         btnentrar.setOnClickListener {
 
-
             val usuario = usuario_input.text.toString()
             val contrasena = contrasena_input.text.toString()
 
             //Crea un loop para verificar en la lista de clientes registrados si estan los inputs
             for(i in 0 until clientes_registrados.size) {
-
                 if (clientes_registrados.get(i).usuario == usuario && clientes_registrados.get(i).contrasena == contrasena){
                     startActivity(Intent(this, Seleccion::class.java))
                     Toast.makeText(this,"Bienvenido " + usuario,

@@ -45,7 +45,7 @@ class ClientesDB (context: Context): SQLiteOpenHelper(context, DATABASE_NAME,nul
         values.put(Tablas.Cliente.USUARIO, cliente.usuario)
         values.put(Tablas.Cliente.CONTRASENA, cliente.contrasena)
         db.insert(Tablas.Cliente.TABLE_NAME,null,values)
-        Log.d("Usuario:","Registro exitoso")
+        Log.d("Usuario AGREGADO:",values.toString())
     }
 
     fun getData(): MutableList<ClienteModelo>{

@@ -3,7 +3,6 @@ package com.example.app.Database
 class Tablas {
     abstract class Cliente{
         companion object{
-            val _ID = "_id"
             val TABLE_NAME = "Clientes"
             val NOMBRE = "Nombre"
             val APELLIDO = "Apellido"
@@ -12,6 +11,15 @@ class Tablas {
             val FECHA_NAC = "Fecha_nacimiento"
             val USUARIO = "Usuario"
             val CONTRASENA = "Contrasena"
+        }
+    }
+
+    abstract class Cine{
+        companion object{
+            val TABLE_NAME = "Cines"
+            val NOMBRE = "Nombre"
+            val UBICACION = "Ubicacion"
+            val CANTIDAD_SALAS = "Cantidad_salas"
         }
     }
 }
