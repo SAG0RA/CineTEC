@@ -10,6 +10,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
+import {MatTableModule} from '@angular/material/table'; //IMPORTO EL USO DE TABLAS EN MIS PANTALLAS
 
 @NgModule({
   declarations: [],
@@ -23,7 +24,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatProgressSpinnerModule,
     MatToolbarModule,
     MatIconModule,
-    HttpClientModule // Modulo de conexion http IMPORTANTE!
+    HttpClientModule, // Modulo de conexion http IMPORTANTE!
+    MatTableModule //MODULO DE USO DE TABLAS!!!!
   ],
 
   exports: [
@@ -35,7 +37,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatProgressSpinnerModule,
     MatToolbarModule,
     MatIconModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTableModule
   ]
 
 })
