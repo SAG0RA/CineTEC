@@ -7,7 +7,7 @@ import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.app.R
-import com.example.app.API.Usuarios
+import com.example.app.API.Data.Usuarios
 import kotlinx.android.synthetic.main.registrarse.*
 
 class Registro: AppCompatActivity() {

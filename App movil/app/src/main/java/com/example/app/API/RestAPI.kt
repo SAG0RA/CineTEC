@@ -1,5 +1,6 @@
-import com.example.app.API.Usuarios
-import com.example.app.API.Cuenta
+import com.example.app.API.Data.Cines
+import com.example.app.API.Data.Usuarios
+import com.example.app.API.Data.Clientes
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -12,6 +13,9 @@ interface RestAPI {
         @POST("/clientes")
         fun addUser(@Body userData: Usuarios): Call<Usuarios>
 
-        @GET("/cuentas")
-        fun getAccount(): Call<List<Cuenta>>
+        @GET("/api/cliente")
+        fun getClient(): Call<List<Clientes>>
+
+        @GET("/api/sucursal")
+        fun getCine(): Call<List<Cines>>
 }
