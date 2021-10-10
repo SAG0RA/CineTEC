@@ -11,6 +11,7 @@ namespace CineTECAPI.Models
         public string sucursal { get; set; }
         public int filas { get; set; }
         public int columnas { get; set; }
+        public string tablaexcel { get; set; }
 
     }
 }
