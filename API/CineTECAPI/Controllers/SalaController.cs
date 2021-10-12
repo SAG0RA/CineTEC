@@ -8,7 +8,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using CineTECAPI.Models;
 using System.IO;
-using System.Threading.Tasks;
 using OfficeOpenXml;
 using System.Reflection;
 
@@ -34,8 +33,7 @@ namespace CineTECAPI.Controllers
                 select id as ""id"",
                    sucursal as ""sucursal"",
                    filas as ""filas"",
-                   columnas as ""columnas"",
-                   tablaexcel as ""tablaexcel""
+                   columnas as ""columnas""
                 from Sala
             ";
 
@@ -57,12 +55,45 @@ namespace CineTECAPI.Controllers
             return new JsonResult(table); //Devuelve los datos de la tabla en formato JSON
         }
 
+        [HttpGet("{id}")]
+        public JsonResult GetbyId(int id)
+        {
+            string query = @"                                   
+                select id as ""id"",
+                   sucursal as ""sucursal"",
+                   filas as ""filas"",
+                   columnas as ""columnas""
+                from Sala
+                where id = @id
+            ";
+
+            DataTable table = new DataTable();
+            string sqlDataSource = _configuration.GetConnectionString("APIAppCon"); //Obtiene el string de postgres 
+            NpgsqlDataReader myReader;
+            using (NpgsqlConnection myCon = new NpgsqlConnection(sqlDataSource)) //Setea la configuracion de la conexion
+            {
+                myCon.Open();
+                using (NpgsqlCommand myCommand = new NpgsqlCommand(query, myCon)) //Lee los datos de la tabla 
+                {
+                    myCommand.Parameters.AddWithValue("@id", id);
+                    myReader = myCommand.ExecuteReader();
+                    table.Load(myReader);
+
+                    myReader.Close();
+                    myCon.Close();
+                }
+            }
+            return new JsonResult(table); //Devuelve los datos de la tabla en formato JSON
+        }
+
+
+
         [HttpPost]
         public JsonResult Post(Sala sl)
         {
             string query = @"
-                insert into Sala(id, sucursal, filas, columnas, tablaexcel) 
-                values          (@id, @sucursal, @filas, @columnas, @tablaexcel)            
+                insert into Sala(id, sucursal, filas, columnas) 
+                values          (@id, @sucursal, @filas, @columnas)            
             ";
 
             DataTable table = new DataTable();
@@ -77,7 +108,6 @@ namespace CineTECAPI.Controllers
                     myCommand.Parameters.AddWithValue("@sucursal", sl.sucursal);
                     myCommand.Parameters.AddWithValue("@filas", sl.filas);
                     myCommand.Parameters.AddWithValue("@columnas", sl.columnas);
-                    myCommand.Parameters.AddWithValue("@tablaexcel", sl.tablaexcel);
 
                     myReader = myCommand.ExecuteReader();
                     table.Load(myReader);
@@ -91,7 +121,7 @@ namespace CineTECAPI.Controllers
             var filxcol = (sl.filas * sl.columnas);
             //var nombresala = sl.tablaexcel;
             string directory = Directory.GetCurrentDirectory();
-            var file = new FileInfo(@$"{directory}" + "\\Salas\\" + $"{sl.tablaexcel}" + ".xlsx");
+            var file = new FileInfo(@$"{directory}" + "\\Salas\\sala" + $"{sl.id}" + ".xlsx");
             SaveExcelFile(sl, filxcol, file);
 
             return new JsonResult("Asientos de la sala: " + $"{filxcol}");
@@ -109,7 +139,7 @@ namespace CineTECAPI.Controllers
             
             using (var package = new ExcelPackage(file))                          //usa un package que se desecha al salir del bloque de codigo
             {
-                var ws = package.Workbook.Worksheets.Add("sala" + $"{sl.tablaexcel}");     //crea un nuevo worksheet
+                var ws = package.Workbook.Worksheets.Add("sala" + $"{sl.id}");     //crea un nuevo worksheet
        
                 for (int i = 1; i <= filas; i++)
                 {
@@ -130,8 +160,6 @@ namespace CineTECAPI.Controllers
                 }
 
                 package.SaveAsync();//guarda el excel 
-
-                //package.Dispose(); se usa automaticamente al terminar el bloque
             }
         }
 
@@ -193,6 +221,7 @@ namespace CineTECAPI.Controllers
             NpgsqlDataReader myReader;
             using (NpgsqlConnection myCon = new NpgsqlConnection(sqlDataSource))
             {
+
                 myCon.Open();
                 using (NpgsqlCommand myCommand = new NpgsqlCommand(query, myCon))
                 {
@@ -205,6 +234,11 @@ namespace CineTECAPI.Controllers
                     myCon.Close();
                 }
             }
+            
+            string directory = Directory.GetCurrentDirectory();
+            var file = new FileInfo(@$"{directory}" + "\\Salas\\sala" + $"{id}" + ".xlsx");
+            file.Delete();
+
             return new JsonResult("Sala borrada exitosamente");
         }
 

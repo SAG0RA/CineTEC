@@ -14,6 +14,7 @@ namespace CineTECAPI.Models
         public string protagonistas { get; set; }
         public string director { get; set; }
         public string clasificacion { get; set; }
+        public string[] proyecciones { get; set; }
 
     }
 }

@@ -33,7 +33,8 @@ namespace CineTECAPI.Controllers
                    duracion as ""duracion"",
                    protagonistas as ""protagonistas"",
                    director as ""director"",
-                   clasificacion as ""clasificacion""
+                   clasificacion as ""clasificacion"",
+                   proyecciones as ""proyecciones""
                 from Pelicula
             ";
 
@@ -60,8 +61,8 @@ namespace CineTECAPI.Controllers
         public JsonResult Post(Pelicula pl)
         {
             string query = @"
-                insert into Pelicula(nombreog, nombre, imagen, duracion, protagonistas, director, clasificacion) 
-                values             (@nombreog, @nombre, @imagen, @duracion, @protagonistas, @director, @clasificacion)             
+                insert into Pelicula(nombreog, nombre, imagen, duracion, protagonistas, director, clasificacion, proyecciones) 
+                values             (@nombreog, @nombre, @imagen, @duracion, @protagonistas, @director, @clasificacion, @proyecciones)             
             ";
 
             DataTable table = new DataTable();
@@ -79,6 +80,7 @@ namespace CineTECAPI.Controllers
                     myCommand.Parameters.AddWithValue("@protagonistas", pl.protagonistas);
                     myCommand.Parameters.AddWithValue("@director", pl.director);
                     myCommand.Parameters.AddWithValue("@clasificacion", pl.clasificacion);
+                    myCommand.Parameters.AddWithValue("@proyecciones", pl.proyecciones);
 
                     myReader = myCommand.ExecuteReader();
                     table.Load(myReader);
@@ -102,7 +104,8 @@ namespace CineTECAPI.Controllers
                     duracion = @duracion,
                     protagonistas = @protagonistas,
                     director = @director,
-                    clasificacion = @clasificacion
+                    clasificacion = @clasificacion,
+                    proyecciones = @proyecciones
                 where nombreog=@nombreog
             ";
 
@@ -121,6 +124,7 @@ namespace CineTECAPI.Controllers
                     myCommand.Parameters.AddWithValue("@protagonistas", pl.protagonistas);
                     myCommand.Parameters.AddWithValue("@director", pl.director);
                     myCommand.Parameters.AddWithValue("@clasificacion", pl.clasificacion);
+                    myCommand.Parameters.AddWithValue("@proyecciones", pl.proyecciones);
 
                     myReader = myCommand.ExecuteReader();
                     table.Load(myReader);
