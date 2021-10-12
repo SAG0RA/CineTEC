@@ -10,7 +10,6 @@
         android:id="@+id/btnsiguiente"
         android:layout_width="201dp"
         android:layout_height="59dp"
-        android:background="@android:color/holo_red_light"
         android:text="Siguiente"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"

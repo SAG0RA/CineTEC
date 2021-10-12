@@ -12,11 +12,11 @@ namespace CineTECAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PeliculaController : Controller
+    public class EmpleadoController : Controller
     {
         private readonly IConfiguration _configuration;
 
-        public PeliculaController(IConfiguration configuration)
+        public EmpleadoController(IConfiguration configuration)
         {
             _configuration = configuration; //Inyeccion de dependencia
         }
@@ -27,16 +27,12 @@ namespace CineTECAPI.Controllers
         {
             //String de sql para recibir los datos de la tabla
             string query = @"                                   
-                select p_id as ""p_id"",
-                   nombreog as ""nombreog"",
+                select cedula as ""cedula"",
                    nombre as ""nombre"",
-                   imagen as ""imagen"",
-                   duracion as ""duracion"",
-                   protagonistas as ""protagonistas"",
-                   director as ""director"",
-                   clasificacion as ""clasificacion"",
-                   proyecciones as ""proyecciones""
-                from Pelicula
+                   rol as ""rol"",
+                   usuario as ""usuario"",
+                   contraseña as ""contraseña""
+                from Empleado
             ";
 
             DataTable table = new DataTable();
@@ -62,17 +58,13 @@ namespace CineTECAPI.Controllers
         public JsonResult GetbyId(int id)
         {
             string query = @"                                   
-                select p_id as ""p_id"",
-                   nombreog as ""nombreog"",
+                select cedula as ""cedula"",
                    nombre as ""nombre"",
-                   imagen as ""imagen"",
-                   duracion as ""duracion"",
-                   protagonistas as ""protagonistas"",
-                   director as ""director"",
-                   clasificacion as ""clasificacion"",
-                   proyecciones as ""proyecciones""
-                from Pelicula
-                where p_id = @p_id
+                   rol as ""rol"",
+                   usuario as ""usuario"",
+                   contraseña as ""contraseña""
+                from Empleado
+                where cedula = @cedula
             ";
 
             DataTable table = new DataTable();
@@ -83,7 +75,7 @@ namespace CineTECAPI.Controllers
                 myCon.Open();
                 using (NpgsqlCommand myCommand = new NpgsqlCommand(query, myCon)) //Lee los datos de la tabla 
                 {
-                    myCommand.Parameters.AddWithValue("@p_id", id);
+                    myCommand.Parameters.AddWithValue("@cedula", id);
                     myReader = myCommand.ExecuteReader();
                     table.Load(myReader);
 
@@ -95,11 +87,11 @@ namespace CineTECAPI.Controllers
         }
 
         [HttpPost]
-        public JsonResult Post(Pelicula pl)
+        public JsonResult Post(Empleado el)
         {
             string query = @"
-                insert into Pelicula(p_id, nombreog, nombre, imagen, duracion, protagonistas, director, clasificacion, proyecciones) 
-                values             (@p_id, @nombreog, @nombre, @imagen, @duracion, @protagonistas, @director, @clasificacion, @proyecciones)             
+                insert into Empleado(cedula, nombre, rol, usuario, contraseña) 
+                values             (@cedula, @nombre, @rol, @usuario, @contraseña)            
             ";
 
             DataTable table = new DataTable();
@@ -110,15 +102,11 @@ namespace CineTECAPI.Controllers
                 myCon.Open();
                 using (NpgsqlCommand myCommand = new NpgsqlCommand(query, myCon))
                 {
-                    myCommand.Parameters.AddWithValue("@p_id", pl.p_id);
-                    myCommand.Parameters.AddWithValue("@nombreog", pl.nombreog);
-                    myCommand.Parameters.AddWithValue("@nombre", pl.nombre);
-                    myCommand.Parameters.AddWithValue("@imagen", pl.imagen);
-                    myCommand.Parameters.AddWithValue("@duracion", pl.duracion);
-                    myCommand.Parameters.AddWithValue("@protagonistas", pl.protagonistas);
-                    myCommand.Parameters.AddWithValue("@director", pl.director);
-                    myCommand.Parameters.AddWithValue("@clasificacion", pl.clasificacion);
-                    myCommand.Parameters.AddWithValue("@proyecciones", pl.proyecciones);
+                    myCommand.Parameters.AddWithValue("@cedula", el.cedula);
+                    myCommand.Parameters.AddWithValue("@nombre", el.nombre);
+                    myCommand.Parameters.AddWithValue("@rol", el.rol);
+                    myCommand.Parameters.AddWithValue("@usuario", el.usuario);
+                    myCommand.Parameters.AddWithValue("@contraseña", el.contraseña);
 
                     myReader = myCommand.ExecuteReader();
                     table.Load(myReader);
@@ -127,25 +115,21 @@ namespace CineTECAPI.Controllers
                     myCon.Close();
                 }
             }
-            return new JsonResult("Pelicula añadida exitosamente");
+            return new JsonResult("Empleado añadido exitosamente");
         }
 
 
         [HttpPut]
-        public JsonResult Put(Pelicula pl)
+        public JsonResult Put(Empleado el)
 
         {
             string query = @"
-                update Pelicula 
-                set p_id = @p_id,
-                    nombre = @nombre,
-                    imagen = @imagen,
-                    duracion = @duracion,
-                    protagonistas = @protagonistas,
-                    director = @director,
-                    clasificacion = @clasificacion,
-                    proyecciones = @proyecciones
-                where p_id=@p_id
+                update Empleado
+                set nombre = @nombre,
+                    rol = @rol,
+                    usuario = @usuario,
+                    contraseña = @contraseña
+                where cedula=@cedula
             ";
 
             DataTable table = new DataTable();
@@ -156,14 +140,11 @@ namespace CineTECAPI.Controllers
                 myCon.Open();
                 using (NpgsqlCommand myCommand = new NpgsqlCommand(query, myCon))
                 {
-                    myCommand.Parameters.AddWithValue("@nombreog", pl.nombreog);
-                    myCommand.Parameters.AddWithValue("@nombre", pl.nombre);
-                    myCommand.Parameters.AddWithValue("@imagen", pl.imagen);
-                    myCommand.Parameters.AddWithValue("@duracion", pl.duracion);
-                    myCommand.Parameters.AddWithValue("@protagonistas", pl.protagonistas);
-                    myCommand.Parameters.AddWithValue("@director", pl.director);
-                    myCommand.Parameters.AddWithValue("@clasificacion", pl.clasificacion);
-                    myCommand.Parameters.AddWithValue("@proyecciones", pl.proyecciones);
+                    myCommand.Parameters.AddWithValue("@cedula", el.cedula);
+                    myCommand.Parameters.AddWithValue("@nombre", el.nombre);
+                    myCommand.Parameters.AddWithValue("@rol", el.rol);
+                    myCommand.Parameters.AddWithValue("@usuario", el.usuario);
+                    myCommand.Parameters.AddWithValue("@contraseña", el.contraseña);
 
                     myReader = myCommand.ExecuteReader();
                     table.Load(myReader);
@@ -172,7 +153,7 @@ namespace CineTECAPI.Controllers
                     myCon.Close();
                 }
             }
-            return new JsonResult("Datos de pelicula actualizados exitosamente");
+            return new JsonResult("Empleado actualizado exitosamente");
         }
 
         [HttpDelete("{id}")]
@@ -180,8 +161,8 @@ namespace CineTECAPI.Controllers
 
         {
             string query = @"
-                delete from Pelicula
-                where p_id=@p_id
+                delete from Empleado
+                where cedula=@cedula
             ";
 
             DataTable table = new DataTable();
@@ -193,7 +174,7 @@ namespace CineTECAPI.Controllers
                 using (NpgsqlCommand myCommand = new NpgsqlCommand(query, myCon))
                 {
 
-                    myCommand.Parameters.AddWithValue("@p_id", id);
+                    myCommand.Parameters.AddWithValue("@cedula", id);
                     myReader = myCommand.ExecuteReader();
                     table.Load(myReader);
 
@@ -201,7 +182,7 @@ namespace CineTECAPI.Controllers
                     myCon.Close();
                 }
             }
-            return new JsonResult("Pelicula borrada exitosamente");
+            return new JsonResult("Empleado borrado exitosamente");
         }
 
     }

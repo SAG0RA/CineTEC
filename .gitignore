@@ -452,3 +452,6 @@ $RECYCLE.BIN/
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+App movil/app/local.properties
+App movil/.idea/gradle.xml
+*.xlsx

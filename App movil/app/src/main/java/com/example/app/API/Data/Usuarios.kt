@@ -1,4 +1,4 @@
-package com.example.app.API
+package com.example.app.API.Data
 
 import com.google.gson.annotations.SerializedName
 // Clase encargada de administar los datos serializados de los clientes en el API

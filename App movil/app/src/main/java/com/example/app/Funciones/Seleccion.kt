@@ -2,35 +2,35 @@ package com.example.app.Funciones
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
-import com.example.app.API.Cuenta
+import com.example.app.Database.Cine.CinesDB
+import com.example.app.Database.Cliente.ClientesDB
 import com.example.app.R
-import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.seleccion.*
 
 class Seleccion : AppCompatActivity() {
 
+    private var cinedb:CinesDB? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.seleccion)
+
+        /////////////// BASE DE DATOS SQLite (Cines) //////////////
+        cinedb = CinesDB(this)
+        val cines_registrados = cinedb!!.getData()
+        //////////////////////////////////////////////////////////////
+
+        val spinner_cines = findViewById<Spinner>(R.id.spinner_cines)
+        val adaptador = ArrayAdapter(this, android.R.layout.simple_spinner_item,cines_registrados)
+        spinner_cines.adapter = adaptador
+
 
         btnsiguiente.setOnClickListener {
                 startActivity(Intent(this, Asientos::class.java))
             }
     }
 
-    /** Funcion encarcada de mostrar detalles de la cuenta del GET en pantalla
-     *@param datos informacion del API
-     * @param detalles pantalla para ver los detalles
-     */
-    fun verCuenta(datos: List<Cuenta>, detalles: TextView) {
-        for (c in datos!!) {
-            detalles.text = "Numero de cuenta: " + "${c.numero_cuenta}" +
-                    "\n Descripcion: ${c.descripcion}" +
-                    "\n Moneda: ${c.moneda}" +
-                    "\n Tipo de cuenta: ${c.tipo_cuenta} "
-        }
-    }
 }
