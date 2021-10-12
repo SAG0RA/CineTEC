@@ -1,17 +1,21 @@
 import { Component, OnInit } from '@angular/core';
+import { Usuario } from 'src/app/interfaces/usuario';
 
 
-export interface PeriodicElement {
+/*export interface PeriodicElement {
   name: string;
   position: number;
   weight: number;
   symbol: string;
-}
+}*/
 
 //AQUI IMPORTO EL USO DE TABLAS
 //Completa relacion usuarios.component.html
 
-const ELEMENT_DATA: PeriodicElement[] = [
+//EN CASO DE SER LOCAL DARIA FORMA ESTA TABLA CON LOS DATOS DEL CINE
+//A fin de cuentas consumo una tabla del servicio y no esta!
+
+const ELEMENT_DATA: Usuario[] = [
   {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
   {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
   {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
@@ -31,7 +35,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class UsuariosComponent implements OnInit {
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol']; //COMPLETA RELACION usuarios.component.HTML
   dataSource = ELEMENT_DATA;
 
   constructor() { }
