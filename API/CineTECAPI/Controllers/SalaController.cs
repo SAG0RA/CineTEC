@@ -87,13 +87,16 @@ namespace CineTECAPI.Controllers
         }
 
 
-
         [HttpPost]
         public JsonResult Post(Sala sl)
         {
             string query = @"
                 insert into Sala(id, sucursal, filas, columnas) 
-                values          (@id, @sucursal, @filas, @columnas)            
+                values          (@id, @sucursal, @filas, @columnas); 
+
+                UPDATE Sucursal
+	                SET cantidadsalas = cantidadsalas + 1
+	                WHERE ubicacion = @currsucursal;
             ";
 
             DataTable table = new DataTable();
@@ -104,10 +107,12 @@ namespace CineTECAPI.Controllers
                 myCon.Open();
                 using (NpgsqlCommand myCommand = new NpgsqlCommand(query, myCon))
                 {
-                    myCommand.Parameters.AddWithValue("@id", sl.id);
+                    myCommand.Parameters.AddWithValue("@id", sl.id); //sustituir por los valores en el query 
                     myCommand.Parameters.AddWithValue("@sucursal", sl.sucursal);
                     myCommand.Parameters.AddWithValue("@filas", sl.filas);
                     myCommand.Parameters.AddWithValue("@columnas", sl.columnas);
+
+                    myCommand.Parameters.AddWithValue("@currsucursal", sl.sucursal);
 
                     myReader = myCommand.ExecuteReader();
                     table.Load(myReader);
@@ -124,7 +129,7 @@ namespace CineTECAPI.Controllers
             var file = new FileInfo(@$"{directory}" + "\\Salas\\sala" + $"{sl.id}" + ".xlsx");
             SaveExcelFile(sl, filxcol, file);
 
-            return new JsonResult("Asientos de la sala: " + $"{filxcol}");
+            return new JsonResult("Sala" + $"{sl.id} Introducida exitosamente. Asientos de la sala: " + $"{filxcol}");
         }
 
         private void SaveExcelFile(Sala sl, object filxcol, FileInfo file)
@@ -212,8 +217,13 @@ namespace CineTECAPI.Controllers
 
         {
             string query = @"
-                delete from Sala
-                where id=@id
+                UPDATE public.sucursal
+	                SET cantidadsalas = cantidadsalas - 1
+	                WHERE ubicacion = (select sucursal from sala
+	                where id = @id);
+	
+	                delete from sala
+	                where id = @id
             ";
 
             DataTable table = new DataTable();

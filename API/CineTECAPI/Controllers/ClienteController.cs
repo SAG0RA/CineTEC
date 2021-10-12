@@ -58,6 +58,41 @@ namespace CineTECAPI.Controllers
 
         }
 
+        [HttpGet("{id}")]
+        public JsonResult GetbyId(int id)
+        {
+            string query = @"                                   
+                select cedula as ""cedula"",
+                   pnombre as ""pnombre"",
+                   snombre as ""snombre"",
+                   apellido as ""apellido"",
+                   telefono as ""telefono"",
+                   to_char(fechanac, 'YYYY-MM-DD') as ""fechanac"",
+                   edad as ""edad"",
+                   usuario as ""usuario"",
+                   contraseña as ""contraseña""
+                where cedula = @cedula
+            ";
+
+            DataTable table = new DataTable();
+            string sqlDataSource = _configuration.GetConnectionString("APIAppCon"); //Obtiene el string de postgres 
+            NpgsqlDataReader myReader;
+            using (NpgsqlConnection myCon = new NpgsqlConnection(sqlDataSource)) //Setea la configuracion de la conexion
+            {
+                myCon.Open();
+                using (NpgsqlCommand myCommand = new NpgsqlCommand(query, myCon)) //Lee los datos de la tabla 
+                {
+                    myCommand.Parameters.AddWithValue("@cedula", id);
+                    myReader = myCommand.ExecuteReader();
+                    table.Load(myReader);
+
+                    myReader.Close();
+                    myCon.Close();
+                }
+            }
+            return new JsonResult(table); //Devuelve los datos de la tabla en formato JSON
+        }
+
         [HttpPost]
         public JsonResult Post(Cliente cl)
         {
@@ -166,7 +201,7 @@ namespace CineTECAPI.Controllers
                     myCon.Close();
                 }
             }
-            return new JsonResult("Borrado exitosamente");
+            return new JsonResult("Cliente borrado exitosamente");
         }
 
     }

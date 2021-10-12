@@ -27,7 +27,8 @@ namespace CineTECAPI.Controllers
         {
             //String de sql para recibir los datos de la tabla
             string query = @"                                   
-                select nombrecine as ""nombrecine"",
+                select cineid as ""cineid"",
+                   nombrecine as ""nombrecine"",
                    ubicacion as ""ubicacion"",
                    cantidadsalas as ""cantidadsalas""
                 from Sucursal
@@ -52,12 +53,43 @@ namespace CineTECAPI.Controllers
 
         }
 
+        [HttpGet("{id}")]
+        public JsonResult GetbyId(int id)
+        {
+            string query = @"                                   
+                select cineid as ""cineid"",
+                   nombrecine as ""nombrecine"",
+                   ubicacion as ""ubicacion"",
+                   cantidadsalas as ""cantidadsalas""
+                from Sucursal
+                where cineid = @cineid
+            ";
+
+            DataTable table = new DataTable();
+            string sqlDataSource = _configuration.GetConnectionString("APIAppCon"); //Obtiene el string de postgres 
+            NpgsqlDataReader myReader;
+            using (NpgsqlConnection myCon = new NpgsqlConnection(sqlDataSource)) //Setea la configuracion de la conexion
+            {
+                myCon.Open();
+                using (NpgsqlCommand myCommand = new NpgsqlCommand(query, myCon)) //Lee los datos de la tabla 
+                {
+                    myCommand.Parameters.AddWithValue("@cineid", id);
+                    myReader = myCommand.ExecuteReader();
+                    table.Load(myReader);
+
+                    myReader.Close();
+                    myCon.Close();
+                }
+            }
+            return new JsonResult(table); //Devuelve los datos de la tabla en formato JSON
+        }
+
         [HttpPost]
         public JsonResult Post(Sucursal scl)
         {
             string query = @"
-                insert into Sucursal(nombrecine, ubicacion, cantidadsalas) 
-                values              (@nombrecine, @ubicacion, @cantidadsalas)            
+                insert into Sucursal(cineid, nombrecine, ubicacion, cantidadsalas) 
+                values              (@cineid, @nombrecine, @ubicacion, @cantidadsalas)            
             ";
 
             DataTable table = new DataTable();
@@ -68,6 +100,7 @@ namespace CineTECAPI.Controllers
                 myCon.Open();
                 using (NpgsqlCommand myCommand = new NpgsqlCommand(query, myCon))
                 {
+                    myCommand.Parameters.AddWithValue("@cineid", scl.cineid);
                     myCommand.Parameters.AddWithValue("@nombrecine", scl.nombrecine);
                     myCommand.Parameters.AddWithValue("@ubicacion", scl.ubicacion);
                     myCommand.Parameters.AddWithValue("@cantidadsalas", scl.cantidadsalas);
@@ -89,9 +122,11 @@ namespace CineTECAPI.Controllers
         {
             string query = @"
                 update Sucursal 
-                set ubicacion = @ubicacion,
+                set cineid = @cineid, 
+                    nombrecine = @nombrecine,
+                    ubicacion = @ubicacion,
                     cantidadsalas = @cantidadsalas
-                where nombrecine = @nombrecine
+                where cineid = @cineid
             ";
 
             DataTable table = new DataTable();
@@ -102,6 +137,7 @@ namespace CineTECAPI.Controllers
                 myCon.Open();
                 using (NpgsqlCommand myCommand = new NpgsqlCommand(query, myCon))
                 {
+                    myCommand.Parameters.AddWithValue("@cineid", scl.cineid);
                     myCommand.Parameters.AddWithValue("@nombrecine", scl.nombrecine);
                     myCommand.Parameters.AddWithValue("@ubicacion", scl.ubicacion);
                     myCommand.Parameters.AddWithValue("@cantidadsalas", scl.cantidadsalas);
@@ -117,12 +153,12 @@ namespace CineTECAPI.Controllers
         }
 
         [HttpDelete("{id}")]
-        public JsonResult Delete(string nombresucursal)
+        public JsonResult Delete(int id)
 
         {
             string query = @"
                 delete from Sucursal
-                where nombrecine=@nombrecine
+                where cineid=@cineid
             ";
 
             DataTable table = new DataTable();
@@ -134,7 +170,7 @@ namespace CineTECAPI.Controllers
                 using (NpgsqlCommand myCommand = new NpgsqlCommand(query, myCon))
                 {
 
-                    myCommand.Parameters.AddWithValue("@nombrecine", nombresucursal);
+                    myCommand.Parameters.AddWithValue("@cineid", id);
                     myReader = myCommand.ExecuteReader();
                     table.Load(myReader);
 
