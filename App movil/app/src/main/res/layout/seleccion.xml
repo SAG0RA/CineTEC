@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     android:background="@android:color/background_dark">
 
+    <Spinner
+        android:id="@+id/spinner_proyecciones"
+        android:layout_width="247dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="268dp"
+        android:background="@android:color/holo_red_light"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Button
         android:id="@+id/btnsiguiente"
         android:layout_width="201dp"
@@ -20,40 +30,28 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.959" />
 
-    <Spinner
-        android:id="@+id/spinner_proyecciones"
-        android:layout_width="246dp"
-        android:layout_height="69dp"
-        android:layout_marginTop="400dp"
-        android:background="@android:color/holo_red_light"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/lblCineTEC6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Seleccione proyeccion:"
         android:textColor="@android:color/holo_red_light"
-        android:textSize="24sp"
+        android:textSize="18sp"
         app:fontFamily="@font/cairo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.44"
+        app:layout_constraintHorizontal_bias="0.337"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499" />
+        app:layout_constraintVertical_bias="0.329" />
 
     <Spinner
         android:id="@+id/spinner_peliculas"
-        android:layout_width="246dp"
-        android:layout_height="69dp"
-        android:layout_marginTop="252dp"
+        android:layout_width="247dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="176dp"
         android:background="@android:color/holo_red_light"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -61,16 +59,16 @@
         android:id="@+id/lblCineTEC4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Seleccione pelo:"
+        android:text="Seleccione pelicula:"
         android:textColor="@android:color/holo_red_light"
-        android:textSize="24sp"
+        android:textSize="18sp"
         app:fontFamily="@font/cairo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.326"
+        app:layout_constraintHorizontal_bias="0.307"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.282" />
+        app:layout_constraintVertical_bias="0.195" />
 
     <TextView
         android:id="@+id/lblCineTEC3"
@@ -78,25 +76,36 @@
         android:layout_height="wrap_content"
         android:text="Selecciona el cine:"
         android:textColor="@android:color/holo_red_light"
-        android:textSize="24sp"
+        android:textSize="18sp"
         app:fontFamily="@font/cairo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.356"
+        app:layout_constraintHorizontal_bias="0.296"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.069" />
+        app:layout_constraintVertical_bias="0.058" />
 
     <Spinner
         android:id="@+id/spinner_cines"
-        android:layout_width="246dp"
-        android:layout_height="69dp"
-        android:layout_marginTop="104dp"
+        android:layout_width="247dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="80dp"
         android:background="@android:color/holo_red_light"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imagen_pelicula"
+        android:layout_width="216dp"
+        android:layout_height="290dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.75"
+        app:srcCompat="@drawable/proyector" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

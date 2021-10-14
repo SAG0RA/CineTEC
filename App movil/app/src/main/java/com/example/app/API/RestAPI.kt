@@ -1,6 +1,7 @@
 import com.example.app.API.Data.Cines
 import com.example.app.API.Data.Usuarios
 import com.example.app.API.Data.Clientes
+import com.example.app.API.Data.Peliculas
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -18,4 +19,7 @@ interface RestAPI {
 
         @GET("/api/sucursal")
         fun getCine(): Call<List<Cines>>
+
+        @GET("/api/pelicula")
+        fun getPelicula(): Call<List<Peliculas>>
 }

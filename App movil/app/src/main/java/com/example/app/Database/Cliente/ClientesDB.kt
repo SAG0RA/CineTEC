@@ -13,7 +13,7 @@ class ClientesDB (context: Context): SQLiteOpenHelper(context, DATABASE_NAME,nul
 
     companion object{
         val DATABASE_VERSION = 1
-        val DATABASE_NAME = "Clientes"
+        val DATABASE_NAME = "CineTEC"
     }
 
     init{

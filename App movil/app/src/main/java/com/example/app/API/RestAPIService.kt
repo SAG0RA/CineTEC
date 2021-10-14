@@ -1,10 +1,11 @@
 import android.util.Log
 import com.example.app.API.Data.Cines
 import com.example.app.API.Data.Clientes
+import com.example.app.API.Data.Peliculas
 import com.example.app.API.Data.Usuarios
-import com.example.app.Database.Cine.CineModelo
 import com.example.app.Database.Cine.CinesDB
 import com.example.app.Database.Cliente.ClientesDB
+import com.example.app.Database.Pelicula.PeliculasDB
 import com.example.app.Funciones.Inicio
 import retrofit2.Call
 import retrofit2.Callback
@@ -88,6 +89,31 @@ class RestAPIService {
                     )
             }
             override fun onFailure(call: Call<List<Cines>>, t: Throwable) {
+                Log.d("Error", t.message)
+            }
+        })
+    }
+
+    fun getPelicula(db: PeliculasDB){
+        val retrofit = ServiceBuilder.buildService(RestAPI::class.java)
+        retrofit.getPelicula().enqueue(object : Callback<List<Peliculas>> {
+            override fun onResponse(call: Call<List<Peliculas>>, response: Response<List<Peliculas>>) {
+                val datos = response.body()
+
+                if (datos != null) {
+                    Inicio().sync_Peliculas(datos,db)
+                }
+
+                for (c in datos!!)
+// Print para verificar que se haya hecho bien la solicitud
+                    Log.d(
+                        "PELICULA: ",
+                           "\n Nombre original: ${c.nombreog} " +
+                                "\n Imagen: ${c.imagen} " +
+                                "\n Proyecciones: ${c.proyecciones}"
+                    )
+            }
+            override fun onFailure(call: Call<List<Peliculas>>, t: Throwable) {
                 Log.d("Error", t.message)
             }
         })

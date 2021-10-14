@@ -22,4 +22,17 @@ class Tablas {
             val CANTIDAD_SALAS = "Cantidad_salas"
         }
     }
+
+    abstract class Pelicula{
+        companion object{
+            val TABLE_NAME = "Peliculas"
+            val NOMBRE_ORIGINAL = "Nombre_original"
+            val IMAGEN = "Imagen"
+            val DURACION = "Duracion"
+            val PROTAGONISTAS = "Protagonistas"
+            val DIRECTOR = "Director"
+            val CLASIFICACION = "Clasificacion"
+            val PROYECCIONES = "Proyecciones"
+        }
+    }
 }
