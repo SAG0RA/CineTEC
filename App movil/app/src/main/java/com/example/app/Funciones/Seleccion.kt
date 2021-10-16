@@ -73,7 +73,7 @@ class Seleccion : AppCompatActivity(){
 
 
         btnsiguiente.setOnClickListener {
-                startActivity(Intent(this, Asientos::class.java))
+                startActivity(Intent(this, Boletos::class.java))
             }
     }
 

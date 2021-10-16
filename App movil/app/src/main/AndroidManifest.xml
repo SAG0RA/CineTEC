@@ -23,6 +23,7 @@
         <activity android:name=".Funciones.Registro" />
         <activity android:name=".Funciones.Seleccion" />
         <activity android:name=".Funciones.Asientos" />
+        <activity android:name=".Funciones.Boletos" />
 
 
         <activity android:name=".Funciones.Inicio"
