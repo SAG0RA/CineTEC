@@ -1,0 +1,13 @@
+-Para lograr la ejecución satisfactoria del REST API, se debe tener los siguientes paquetes y programas instalados:
+Microsoft .NET
+Microsoft .NET Core Runtime
+Microsoft .NET Runtime 
+Microsoft .NET SDK
+IIs Express
+Módulo URL Rewrite
+
+-Abrir la solución en Visual Studio 2019 en la dirección ...\CineTEC\API\CineTECAPI\CineTECAPI.sln
+
+-Correr la aplicación en visual studio, en el botón verde que dice "IIs Express"
+
+-Entrar en el navegador a https://localhost:44306/swagger/index.html para modificar la base de datos
