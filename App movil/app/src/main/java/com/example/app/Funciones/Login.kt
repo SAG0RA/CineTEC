@@ -2,7 +2,6 @@ package com.example.app.Funciones
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -23,7 +22,7 @@ class Login : AppCompatActivity() {
 
         /////////////// BASE DE DATOS SQLite (Clientes) //////////////
         db = ClientesDB(this)
-        val clientes_registrados = db!!.getData()
+        val clientes_registrados = db!!.getUsuarios()
         //////////////////////////////////////////////////////////////
 
         //Variables para recibir los datos de entrada de usuario y contraseña
@@ -39,7 +38,8 @@ class Login : AppCompatActivity() {
             //Crea un loop para verificar en la lista de clientes registrados si estan los inputs
             for(i in 0 until clientes_registrados.size) {
                 if (clientes_registrados.get(i).usuario == usuario && clientes_registrados.get(i).contrasena == contrasena){
-                    startActivity(Intent(this, Seleccion::class.java))
+                    startActivity(Intent(this, Seleccion::class.java)
+                        .putExtra("Usuario",usuario))
                     Toast.makeText(this,"Bienvenido " + usuario,
                         Toast.LENGTH_LONG).show()
                 }else{

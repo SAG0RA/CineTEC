@@ -48,7 +48,7 @@ class ClientesDB (context: Context): SQLiteOpenHelper(context, DATABASE_NAME,nul
         Log.d("Usuario AGREGADO:",values.toString())
     }
 
-    fun getData(): MutableList<ClienteModelo>{
+    fun getUsuarios(): MutableList<ClienteModelo>{
         val list: MutableList<ClienteModelo> = ArrayList()
         val query = "Select * from " + Tablas.Cliente.TABLE_NAME
         val result = db.rawQuery(query,null)
@@ -63,7 +63,26 @@ class ClientesDB (context: Context): SQLiteOpenHelper(context, DATABASE_NAME,nul
 
         result.close()
         db.close()
+        return list
+    }
 
+    fun getDatos():MutableList<ClienteModelo>{
+        val list: MutableList<ClienteModelo> = ArrayList()
+        val query = "Select * from " + Tablas.Cliente.TABLE_NAME
+        val result = db.rawQuery(query,null)
+        if(result.moveToFirst()){
+            do{
+                val cliente = ClienteModelo()
+                cliente.usuario = result.getString(result.getColumnIndex(Tablas.Cliente.USUARIO))
+                cliente.nombre = result.getString(result.getColumnIndex(Tablas.Cliente.NOMBRE))
+                cliente.apellido = result.getString(result.getColumnIndex(Tablas.Cliente.APELLIDO))
+                cliente.cedula = result.getInt(result.getColumnIndex(Tablas.Cliente.CEDULA))
+                list.add(cliente)
+            }while(result.moveToNext())
+        }
+
+        result.close()
+        db.close()
         return list
     }
 }

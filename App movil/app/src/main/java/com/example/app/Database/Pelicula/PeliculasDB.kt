@@ -96,9 +96,74 @@ class PeliculasDB (context: Context): SQLiteOpenHelper(context, DATABASE_NAME,nu
             } while (result.moveToNext())
         }
         result.close()
+//        db.close()
+        return list
+    }
+
+    fun getDirector(): MutableList<PeliModelo> {
+        val list: MutableList<PeliModelo> = ArrayList()
+        val query = "Select * from " + Tablas.Pelicula.TABLE_NAME
+        val result = db.rawQuery(query, null)
+        if (result.moveToFirst()) {
+            do {
+                val director = PeliModelo()
+                director.director = result.getString(result.getColumnIndex(Tablas.Pelicula.DIRECTOR))
+                list.add(director)
+            } while (result.moveToNext())
+        }
+        result.close()
+//        db.close()
+        return list
+    }
+
+    fun getDuracion(): MutableList<PeliModelo> {
+        val list: MutableList<PeliModelo> = ArrayList()
+        val query = "Select * from " + Tablas.Pelicula.TABLE_NAME
+        val result = db.rawQuery(query, null)
+        if (result.moveToFirst()) {
+            do {
+                val duracion = PeliModelo()
+                duracion.duracion = result.getString(result.getColumnIndex(Tablas.Pelicula.DURACION))
+                list.add(duracion)
+            } while (result.moveToNext())
+        }
+        result.close()
+//        db.close()
+        return list
+    }
+
+    fun getProtagonista(): MutableList<PeliModelo> {
+        val list: MutableList<PeliModelo> = ArrayList()
+        val query = "Select * from " + Tablas.Pelicula.TABLE_NAME
+        val result = db.rawQuery(query, null)
+        if (result.moveToFirst()) {
+            do {
+                val protagonista = PeliModelo()
+                protagonista.protagonistas = result.getString(result.getColumnIndex(Tablas.Pelicula.PROTAGONISTAS))
+                list.add(protagonista)
+            } while (result.moveToNext())
+        }
+        result.close()
+//        db.close()
+        return list
+    }
+
+    fun getClasificacion(): MutableList<PeliModelo> {
+        val list: MutableList<PeliModelo> = ArrayList()
+        val query = "Select * from " + Tablas.Pelicula.TABLE_NAME
+        val result = db.rawQuery(query, null)
+        if (result.moveToFirst()) {
+            do {
+                val clasificacion = PeliModelo()
+                clasificacion.clasificacion = result.getString(result.getColumnIndex(Tablas.Pelicula.CLASIFICACION))
+                list.add(clasificacion)
+            } while (result.moveToNext())
+        }
+        result.close()
         db.close()
         return list
     }
+
 
 
 

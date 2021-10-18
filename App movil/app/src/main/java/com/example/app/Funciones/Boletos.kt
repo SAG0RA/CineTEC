@@ -13,7 +13,8 @@ class Boletos : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.boletos)
-        
+        val usuario = intent.getStringExtra("Usuario")
+
         var precio_menores = 0
         var precio_adultos = 0
 
@@ -82,13 +83,17 @@ class Boletos : AppCompatActivity() {
         //////////////////////////////////////////////////////////////////////////////////////
 
         btnsiguiente2.setOnClickListener{
-            if(total.text == "0" || input_tarjeta.toString() == ""){
+            if(total.text == "0" || input_tarjeta.toString().isEmpty()){
                 Toast.makeText(
                     this, "Agregue sus boletos y sus datos",
                     Toast.LENGTH_LONG
                 ).show()
             }else{
-                startActivity(Intent(this, Asientos::class.java))
+                startActivity(Intent(this, Asientos::class.java)
+                    .putExtra("Menores",cantidad_menores)
+                    .putExtra("Adultos",cantidad_adultos)
+                    .putExtra("Monto",(precio_adultos + precio_menores))
+                    .putExtra("Usuario",usuario))
             }
         }
     }

@@ -15,10 +15,10 @@
 
         <Button
             android:id="@+id/btnsiguiente2"
-            android:layout_width="201dp"
-            android:layout_height="59dp"
+            android:layout_width="195dp"
+            android:layout_height="43dp"
             android:text="Siguiente"
-            android:textColor="@android:color/background_dark"
+            android:textColor="@android:color/holo_red_light"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -99,8 +99,8 @@
 
         <EditText
             android:id="@+id/input_tarjeta"
-            android:layout_width="314dp"
-            android:layout_height="39dp"
+            android:layout_width="305dp"
+            android:layout_height="30dp"
             android:layout_marginBottom="22dp"
             android:background="@android:color/background_light"
             android:ems="10"
@@ -109,10 +109,9 @@
             android:textColor="@android:color/background_dark"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.402"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.762" />
+            app:layout_constraintVertical_bias="0.755" />
 
         <TextView
             android:id="@+id/lbladultocantidad"

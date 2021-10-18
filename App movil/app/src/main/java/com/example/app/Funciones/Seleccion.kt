@@ -21,6 +21,7 @@ class Seleccion : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.seleccion)
 
+        val usuario = intent.getStringExtra("Usuario")
         /////////////// BASE DE DATOS SQLite (Cines) //////////////
         cinedb = CinesDB(this)
         peliculadb = PeliculasDB(this)
@@ -28,6 +29,11 @@ class Seleccion : AppCompatActivity(){
         val peliculas_registradas = peliculadb!!.getPeliculas()
         val proyecciones_registradas = peliculadb!!.getProyecciones()
         val imagenes_registradas = peliculadb!!.getImagen()
+
+        val duracion_registrada = peliculadb!!.getDuracion()
+        val director_registrado = peliculadb!!.getDirector()
+        val protagonista_registrado = peliculadb!!.getProtagonista()
+        val clasificacion_registrada = peliculadb!!.getClasificacion()
         //////////////////////////////////////////////////////////////
 
         /////////////////// SPINNER CINES ////////////////////////////
@@ -67,13 +73,34 @@ class Seleccion : AppCompatActivity(){
 
                 IMAGEN.setImageResource(ID)
 
+                //////////////////////////////// DETALLES //////////////////////////////////////////
+
+                val duracion = findViewById<TextView>(R.id.lblduracion)
+                val director = findViewById<TextView>(R.id.lbldirector)
+                val protagonista = findViewById<TextView>(R.id.lblprotagonista)
+                val clasificacion = findViewById<TextView>(R.id.lblclasificacion)
+
+                val duracion_seleccionada = duracion_registrada[position]
+                val director_seleccionado = director_registrado[position]
+                val protagonista_seleccionado = protagonista_registrado[position]
+                val clasificacion_seleccionada = clasificacion_registrada[position]
+
+                val duracion_seleccionada_string = duracion_seleccionada.duracion
+                val director_seleccionado_string = director_seleccionado.director
+                val protagonista_seleccionado_string = protagonista_seleccionado.protagonistas
+                val clasificacion_seleccionada_string = clasificacion_seleccionada.clasificacion
+
+                duracion.text = duracion_seleccionada_string
+                director.text = director_seleccionado_string
+                protagonista.text = protagonista_seleccionado_string
+                clasificacion.text = clasificacion_seleccionada_string
+
             }
 
         }
-
-
         btnsiguiente.setOnClickListener {
-                startActivity(Intent(this, Boletos::class.java))
+                startActivity(Intent(this, Boletos::class.java)
+                    .putExtra("Usuario",usuario))
             }
     }
 
