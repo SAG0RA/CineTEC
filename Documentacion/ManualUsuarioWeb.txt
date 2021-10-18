@@ -1,0 +1,15 @@
+Manual Usuario para la aplicacion Web
+
+Una vez ejecuta esta en el browser de su escogencia, la app presenta una interfaz muy amigable al usuario,
+por lo que en la primera pantalla:
+
+- Login: esta consta de de una patalla simple con dos casillas de "usuario" y "contraseña". Para este caso 
+concretro puede ingresar con el token "emorales" como usuario y "admin" como contraseña.
+
+- Dashboard: una vez superado la pantalla del login puede ingrear a la segunda pantalla entra muestra 
+navegacion por "dashboard", "usuario" y "reportes", aqui es donde se espera mostrar la informacion necesaria 
+para que el usuario consuma los datos necesarios. 
+
+Tambien existe la opcion de deslogearse y volver a la pantalla del login. 
+Con esto completa la navegacion por la vista administrador.
+ 
