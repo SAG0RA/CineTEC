@@ -21,8 +21,9 @@ class Asientos : AppCompatActivity() {
         val monto = intent.getIntExtra("Monto", 0)
         val usuario = intent.getStringExtra("Usuario")
         var total = menores + adultos
+        var puestos_disponibles = total
         var counter = 0
-
+        puestos.text = puestos_disponibles.toString()
         ////////////////////////////////////////// ASIENTOS ///////////////////////////////////////
         sillas1.setOnClickListener {
             counter += 1
@@ -30,6 +31,8 @@ class Asientos : AppCompatActivity() {
                 val recurso: Resources = resources
                 val ID = recurso.getIdentifier("sillaazul", "drawable", packageName)
                 sillas1.setImageResource(ID)
+                puestos_disponibles -= 1
+                puestos.text = puestos_disponibles.toString()
             }
         }
         sillas2.setOnClickListener {
@@ -38,6 +41,8 @@ class Asientos : AppCompatActivity() {
                 val recurso: Resources = resources
                 val ID = recurso.getIdentifier("sillaazul", "drawable", packageName)
                 sillas2.setImageResource(ID)
+                puestos_disponibles -= 1
+                puestos.text = puestos_disponibles.toString()
             }
         }
         sillas3.setOnClickListener {
@@ -46,6 +51,8 @@ class Asientos : AppCompatActivity() {
                 val recurso: Resources = resources
                 val ID = recurso.getIdentifier("sillaazul", "drawable", packageName)
                 sillas3.setImageResource(ID)
+                puestos_disponibles -= 1
+                puestos.text = puestos_disponibles.toString()
             }
         }
         sillas4.setOnClickListener {
@@ -54,6 +61,8 @@ class Asientos : AppCompatActivity() {
                 val recurso: Resources = resources
                 val ID = recurso.getIdentifier("sillaazul", "drawable", packageName)
                 sillas4.setImageResource(ID)
+                puestos_disponibles -= 1
+                puestos.text = puestos_disponibles.toString()
             }
         }
         sillas5.setOnClickListener {
@@ -62,6 +71,8 @@ class Asientos : AppCompatActivity() {
                 val recurso: Resources = resources
                 val ID = recurso.getIdentifier("sillaazul", "drawable", packageName)
                 sillas5.setImageResource(ID)
+                puestos_disponibles -= 1
+                puestos.text = puestos_disponibles.toString()
             }
         }
         sillas6.setOnClickListener {
@@ -70,6 +81,8 @@ class Asientos : AppCompatActivity() {
                 val recurso: Resources = resources
                 val ID = recurso.getIdentifier("sillaazul", "drawable", packageName)
                 sillas6.setImageResource(ID)
+                puestos_disponibles -= 1
+                puestos.text = puestos_disponibles.toString()
             }
         }
         sillas7.setOnClickListener {
@@ -78,6 +91,8 @@ class Asientos : AppCompatActivity() {
                 val recurso: Resources = resources
                 val ID = recurso.getIdentifier("sillaazul", "drawable", packageName)
                 sillas7.setImageResource(ID)
+                puestos_disponibles -= 1
+                puestos.text = puestos_disponibles.toString()
             }
         }
         sillas8.setOnClickListener {
@@ -86,6 +101,8 @@ class Asientos : AppCompatActivity() {
                 val recurso: Resources = resources
                 val ID = recurso.getIdentifier("sillaazul", "drawable", packageName)
                 sillas8.setImageResource(ID)
+                puestos_disponibles -= 1
+                puestos.text = puestos_disponibles.toString()
             }
         }
         sillas9.setOnClickListener {
@@ -94,6 +111,8 @@ class Asientos : AppCompatActivity() {
                 val recurso: Resources = resources
                 val ID = recurso.getIdentifier("sillaazul", "drawable", packageName)
                 sillas9.setImageResource(ID)
+                puestos_disponibles -= 1
+                puestos.text = puestos_disponibles.toString()
             }
         }
         sillas10.setOnClickListener {
@@ -102,6 +121,8 @@ class Asientos : AppCompatActivity() {
                 val recurso: Resources = resources
                 val ID = recurso.getIdentifier("sillaazul", "drawable", packageName)
                 sillas10.setImageResource(ID)
+                puestos_disponibles -= 1
+                puestos.text = puestos_disponibles.toString()
             }
         }
         sillas11.setOnClickListener {
@@ -110,6 +131,8 @@ class Asientos : AppCompatActivity() {
                 val recurso: Resources = resources
                 val ID = recurso.getIdentifier("sillaazul", "drawable", packageName)
                 sillas11.setImageResource(ID)
+                puestos_disponibles -= 1
+                puestos.text = puestos_disponibles.toString()
             }
         }
         sillas12.setOnClickListener {
@@ -118,6 +141,8 @@ class Asientos : AppCompatActivity() {
                 val recurso: Resources = resources
                 val ID = recurso.getIdentifier("sillaazul", "drawable", packageName)
                 sillas12.setImageResource(ID)
+                puestos_disponibles -= 1
+                puestos.text = puestos_disponibles.toString()
             }
         }
         sillas13.setOnClickListener {
@@ -126,6 +151,8 @@ class Asientos : AppCompatActivity() {
                 val recurso: Resources = resources
                 val ID = recurso.getIdentifier("sillaazul", "drawable", packageName)
                 sillas13.setImageResource(ID)
+                puestos_disponibles -= 1
+                puestos.text = puestos_disponibles.toString()
             }
         }
         sillas14.setOnClickListener {
@@ -134,6 +161,8 @@ class Asientos : AppCompatActivity() {
                 val recurso: Resources = resources
                 val ID = recurso.getIdentifier("sillaazul", "drawable", packageName)
                 sillas14.setImageResource(ID)
+                puestos_disponibles -= 1
+                puestos.text = puestos_disponibles.toString()
             }
         }
         sillas15.setOnClickListener {
@@ -142,6 +171,8 @@ class Asientos : AppCompatActivity() {
                 val recurso: Resources = resources
                 val ID = recurso.getIdentifier("sillaazul", "drawable", packageName)
                 sillas15.setImageResource(ID)
+                puestos_disponibles -= 1
+                puestos.text = puestos_disponibles.toString()
             }
         }
         sillas16.setOnClickListener {
@@ -150,6 +181,8 @@ class Asientos : AppCompatActivity() {
                 val recurso: Resources = resources
                 val ID = recurso.getIdentifier("sillaazul", "drawable", packageName)
                 sillas16.setImageResource(ID)
+                puestos_disponibles -= 1
+                puestos.text = puestos_disponibles.toString()
             }
         }
         sillas17.setOnClickListener {
@@ -158,6 +191,8 @@ class Asientos : AppCompatActivity() {
                 val recurso: Resources = resources
                 val ID = recurso.getIdentifier("sillaazul", "drawable", packageName)
                 sillas17.setImageResource(ID)
+                puestos_disponibles -= 1
+                puestos.text = puestos_disponibles.toString()
             }
         }
         sillas18.setOnClickListener {
@@ -166,8 +201,12 @@ class Asientos : AppCompatActivity() {
                 val recurso: Resources = resources
                 val ID = recurso.getIdentifier("sillaazul", "drawable", packageName)
                 sillas18.setImageResource(ID)
+                puestos_disponibles -= 1
+                puestos.text = puestos_disponibles.toString()
             }
         }
+
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         btncomprar.setOnClickListener {
             startActivity(

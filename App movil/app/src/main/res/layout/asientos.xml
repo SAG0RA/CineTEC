@@ -6,6 +6,48 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark">
 
+    <ImageView
+        android:id="@+id/imagen_pelicula2"
+        android:layout_width="67dp"
+        android:layout_height="68dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.724"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.619"
+        app:srcCompat="@drawable/borde_redondo" />
+
+    <TextView
+        android:id="@+id/puestos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="-"
+        android:textColor="@android:color/holo_red_light"
+        android:textSize="18sp"
+        app:fontFamily="@font/cairo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.689"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.609" />
+
+    <TextView
+        android:id="@+id/Puestos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Puestos restantes:"
+        android:textColor="@android:color/holo_red_light"
+        android:textSize="24sp"
+        app:fontFamily="@font/cairo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.072"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.617" />
+
     <Button
         android:id="@+id/btncomprar"
         android:layout_width="162dp"
